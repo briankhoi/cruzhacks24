@@ -1,4 +1,4 @@
-export default function bardtest() {
+export default function Bardtest() {
     return (
         <div>hello world!</div>
     );
