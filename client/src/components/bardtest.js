@@ -12,7 +12,11 @@ export default function StudyGenerator() {
     const [userInput, setUserInput] = useState('');
     const [filePreview, setFilePreview] = useState(null);
     const [model, setModel] = useState('gemini-pro');
-    const [isProcessingPDF, setIsProcessingPDF] = useState(false); // Add this line
+    const [isProcessingPDF, setIsProcessingPDF] = useState(false);
+    
+    // Add the following state variables and setter functions
+    const [generationStatus, setGenerationStatus] = useState('ready');
+    const [successCooldown, setSuccessCooldown] = useState(false);
 
     const handleInputChange = (e) => {
         setUserInput(e.target.value);
@@ -22,15 +26,21 @@ export default function StudyGenerator() {
         setActiveTab(tab);
     };
 
-    const prepareDataForMongoDB = (generatedData) => {
+    const prepareDataForMongoDB = (generatedData, generationType) => {
         // Prepare the data structure for MongoDB
         // Example: Save to MongoDB collection 'flashcards' or 'quizzes'
         // You can implement this logic when setting up MongoDB
-        console.log("Data prepared for MongoDB:", generatedData);
+        const type = generationType === 'flashcards' ? 'flashcards' : 'quiz';
+        console.log(`Data prepared for MongoDB (${type}):`, generatedData);
+        // Implement MongoDB save logic based on the type
+        // Example: save to the 'flashcards' or 'quizzes' collection
+        // mongodb.save(type, generatedData);
     };
 
-    const handleGenerate = async (prompt) => {
+    const handleGenerate = async (prompt, generationType) => {
         try {
+            setGenerationStatus('parsing');
+
             let selectedModel = 'gemini-pro';
 
             if (activeTab === 'files' && isImageFileType()) {
@@ -38,34 +48,43 @@ export default function StudyGenerator() {
             }
             const genModel = genAI.getGenerativeModel({ model: selectedModel });
             const result = await genModel.generateContent(userInput + prompt);
-            const response = await result.response;
-            const text = await response.text();
-    
-            console.log("API Key:", apiKey);
-            console.log("Generated Content:", text);
-    
-            // Prepare data for MongoDB
-            prepareDataForMongoDB({ type: 'generatedContent', data: text });
+            const response = result.response;
+            const text = response.text();
+
+            // Clear userInput after generating content
+            setUserInput('');
+
+            // Prepare data for MongoDB based on the generation type
+            prepareDataForMongoDB({ type: generationType, data: text }, generationType);
+
+            setGenerationStatus('success');
+            setSuccessCooldown(true);
+
+            setTimeout(() => {
+                setSuccessCooldown(false);
+                setGenerationStatus('ready');
+            }, 30000); // 30 seconds cooldown
         } catch (error) {
             console.error("Error fetching data:", error);
+            setGenerationStatus('ready');
         }
     };
 
     const handleFileSubmit = async (event) => {
         const fileInput = event.target;
         const files = fileInput.files;
-    
+
         // Process the selected files
         try {
             // Set isProcessingPDF to true when starting PDF processing
             setIsProcessingPDF(true);
-    
+
             await Promise.all(Array.from(files).map(async (file) => {
                 let model = "gemini-pro"; // Default model
-    
+
                 if (isImageFileType(file)) {
                     model = "gemini-pro-vision"; // Use a different model for images
-    
+
                     // Send raw image data directly to Bard (no encoding needed)
                     const part = {
                         inlineData: {
@@ -73,22 +92,30 @@ export default function StudyGenerator() {
                             mimeType: file.type,
                         },
                     };
+
+                    // Log the text from the image (if applicable)
+                    console.log("Text from Image:", part);
+
                     setUserInput(part);
                 } else {
                     // Process text files
                     const text = await parseFileAsText(file);
+
+                    // Log the text from the file
+                    console.log("Text from File:", text);
+
                     setUserInput(text);
-    
+
                     // Update filePreview based on file type
                     setFilePreview(file.type === 'application/pdf' ? null : URL.createObjectURL(file));
-    
+
                     // Set model to gemini-pro for text files
                     model = "gemini-pro";
                 }
-    
+
                 setModel(model); // Set the model based on file type
             }));
-    
+
             // Reset isProcessingPDF to false after processing files
             setIsProcessingPDF(false);
         } catch (error) {
@@ -97,58 +124,51 @@ export default function StudyGenerator() {
             setIsProcessingPDF(false);
         }
     };
-    
 
-    // Inside parseFileAsText function
     const parseFileAsText = async (file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
-
+    
             reader.onload = async () => {
                 try {
                     if (file.type === 'application/pdf') {
-                        // Set isProcessingPDF to true when starting PDF processing
                         setIsProcessingPDF(true);
                         const typedArray = new Uint8Array(reader.result);
-
-                        // Set the worker source before loading the PDF fill
+    
                         pdfjs.GlobalWorkerOptions.workerSrc = process.env.PUBLIC_URL + '/pdf.worker.mjs';
-
-
+    
                         const pdfDocument = await pdfjs.getDocument({ data: typedArray }).promise;
                         const totalPages = pdfDocument.numPages;
-
-                        // Iterate through each page and extract text
+    
                         let pdfText = '';
                         for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
                             const page = await pdfDocument.getPage(pageNum);
                             const textContent = await page.getTextContent();
                             pdfText += textContent.items.map(item => item.str + ' ').join('\n');
                         }
-
-                        console.log("PDF Text:", pdfText);
+    
+                        //console.log("PDF Text:", pdfText);
+                        
                         resolve(pdfText);
                     } else {
-                        // For non-PDF files, simply return the text
                         const text = reader.result;
-                        //console.log("File Contents:", text); // Log the file contents
                         resolve(text);
                     }
                 } catch (error) {
                     reject(error);
-                }finally {
-                    // Reset isProcessingPDF to false after processing files
-                    setIsProcessingPDF(false);
                 }
             };
-
+    
             reader.onerror = (error) => {
                 reject(error);
             };
-
+    
             reader.readAsArrayBuffer(file);
+        }).finally(() => {
+            setIsProcessingPDF(false);
         });
-    };   
+    };
+       
     
     const isImageFileType = (file) => {
         // Check if file is defined and has a type
@@ -218,10 +238,35 @@ export default function StudyGenerator() {
                 </div>
             )}
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
-                <button onClick={() => handleGenerate("Generate me a list of flashcards from these notes, with the format (term, definition)")} style={{ backgroundColor: 'green', color: 'white', width: '45%', height: '40px' }}>Flashcards</button>
-                <button onClick={() => handleGenerate("Create a multiple choice quiz based on these notes. Include questions and answer choices.")} style={{ backgroundColor: 'green', color: 'white', width: '45%', height: '40px', marginLeft: '10px' }}>Quiz</button>
+                <button
+                    onClick={() => handleGenerate(`Generate a list of flashcards from these notes, strictly formatted for a database as follows:
+
+            - Maintain the exact format: [[title, n/a], [term1, definition1], [term2, definition2], ...]
+            - The first list should contain the title of the flashcards (inferred from the notes).
+            - Subsequent lists should contain term-definition pairings, only one pair per list.
+            - Ensure clarity and accuracy in terms and definitions.`, "flashcards")}
+                    style={{ backgroundColor: 'green', color: 'white', width: '48%', height: '40px', marginRight: '10px' }}
+                >
+                    Flashcards
+                </button>
+                <button
+                    onClick={() => handleGenerate(`Generate a multiple-choice quiz from these notes, strictly formatted for a database as follows:
+
+            - The first list should contain the title of the quiz (inferred from the notes).
+            - Subsequent lists should represent each question:
+                - Question text at the beginning.
+                - Answer choices (labeled a, b, c, etc.) in the middle.
+                - Correct answer at the end.
+            - Maintain the exact format: [[title, n/a, n/a, n/a, n/a], [q1, a, b, c, d, ans], [q2, a, b, ans], ...]
+            - Ensure clarity and variety in questions.
+            - Randomize the order of answer choices for each question.
+            - Include a blend of question types (e.g., factual, conceptual, application-based).`, "quiz")}
+                    style={{ backgroundColor: 'green', color: 'white', width: '48%', height: '40px' }}
+                >
+                    Quiz
+                </button>
             </div>
             {/* Omitted the display of studyMaterials */}
         </div>
-    );            
+    );         
 };
