@@ -81,7 +81,7 @@ export default function GenerateModal({
             },
             body: JSON.stringify({
                 sub: user.sub,
-                quizzes: quiz,
+                quiz: quiz,
             }),
         })
             .then((response) => response.json())
