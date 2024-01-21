@@ -21,6 +21,12 @@
     white-space: nowrap
 }
 
+#form123 {
+    border-radius: 16px;
+    padding: 5px;
+    height: 32px;
+}
+
 .bard-icon:hover {
     background-color: #71906e;
 }

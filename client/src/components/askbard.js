@@ -116,7 +116,7 @@ const AskBardChatBox = () => {
                 <div
                   style={{
                     display: 'inline-block',
-                    backgroundColor: message.sender === 'bard' ? '#8a00e6' : '#f0f0f0',
+                    backgroundColor: message.sender === 'bard' ? '#71906e' : '#f0f0f0',
                     color: message.sender === 'bard' ? 'white' : '#333',
                     borderRadius: '8px',
                     padding: '8px',
@@ -139,6 +139,7 @@ const AskBardChatBox = () => {
             <input
               type="text"
               value={newMessage}
+              id="form123"
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Type your message...">
             </input>
