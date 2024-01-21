@@ -1,6 +1,6 @@
 import Navbar from "../components/navbar";
 import ToDo from "../components/todo";
-import './home.scss';
+import './home.css';
 import React, { useState, useEffect } from "react";
 
 export default function HomePage() {
@@ -33,5 +33,6 @@ export default function HomePage() {
             <h1>Home Page</h1>
             <ToDo />
         </div>
+
     );
 }

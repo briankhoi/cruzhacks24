@@ -1,0 +1,61 @@
+.container {
+  /* display: flex;
+  flex-direction: column; */
+  display: grid;
+  position: relative;
+  margin-left: 70px !important;
+  width: 550px !important;
+  height: flex;
+  background-color: #bdd0c4;
+  border-radius: 16px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.button2 {
+  position: absolute;
+  right: 20px;
+}
+
+img {
+  width: 24px;
+}
+
+input {
+  border-radius: 18px;
+  padding: 20px; 
+  width: 375px;
+  height: 15px;
+}
+
+#submit {
+  margin: 10px; 
+  border-radius: 18px;
+}
+
+.button {
+  display: flex;
+  justify-self: flex-end;
+  align-self: flex-end;
+  float: right;
+}
+
+#edit {
+  border-radius: 18px;
+}
+
+#delete {
+  
+  border-radius: 18px;
+  
+}
+
+/* .btn {
+  display: flex;
+  justify-self: flex-end;
+  align-self: flex-end;
+  border: 1px solid red !important; 
+  float: right;
+} */

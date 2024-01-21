@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import './todo.css';
 
 export default function ToDo() {
     const [value, setValue] = useState(""); 
@@ -28,6 +29,12 @@ export default function ToDo() {
             todo.id === id ? {...todo, isEditing: !todo.isEditing} : todo));
     };
 
+    /*Discards edits*/
+    const discardEdits = id => {
+        setToDoList(toDoList.map(todo => 
+            todo.id === id ? {...todo, isEditing: false} : todo));
+    };
+
     /* To edit */
     const handleEditChange = (id, newTask) => {
         setToDoList(toDoList.map(todo => 
@@ -39,19 +46,22 @@ export default function ToDo() {
     };
 
     return (
-        <> <h1>To-do List</h1>
+        <><div class='container'>
+            <h2>To-do List</h2>
             <form onSubmit={handleSubmit}>
                 <input 
                     type='text' 
                     value={value} 
                     onChange={(e) => setValue(e.target.value)}
-                    placeholder='What is the task today?' 
+                    placeholder='What&#39;s on your to-do list today?'
                 />
-                <button type="submit">Add Task</button>
+                <div className="button">
+                    <button type="submit" id="submit">Add Task</button>
+                </div>
             </form>
             <div>
                 {toDoList.map(todo => (
-                    <div key={todo.id} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div key={todo.id} style={{ display: 'flex'}}>
                         {todo.isEditing ? (
                             <input 
                                 type="text" 
@@ -65,14 +75,36 @@ export default function ToDo() {
                                 {todo.task}
                             </span>
                         )}
-                        <div>
-                            <button onClick={() => toggleEditing(todo.id)}>
-                                {todo.isEditing ? 'Save' : 'Edit'}
-                            </button>
-                            <button onClick={() => deleteToDo(todo.id)}>Delete</button>
+                        <div className="button2">
+                            {/* <button id="edit" onClick={() => toggleEditing(todo.id)}> */}
+                                {/* {todo.isEditing ? 'Save' : 'Edit'} */}
+                                {todo.isEditing ? (
+                                    <div>
+                                    <img
+                                        src="save-icon.png"
+                                        alt="Save"
+                                        id="save"
+                                        onClick={() => toggleEditing(todo.id)}
+                                    />
+                                    <img
+                                        src="x.png"
+                                        alt="Discard"
+                                        id="discard"
+                                        onClick={() => discardEdits(todo.id)}
+                                    />
+                                    </div>
+                                ) : (
+                                    <div>
+                                    <img src="edit2.png" alt="Edit" width="24" onClick={() => toggleEditing(todo.id)}/>
+                                    <img src="trash.png" alt="Delete"  width="24" onClick={() => deleteToDo(todo.id)}/>
+                                    </div>
+                                )}
+                            {/* </button> */}
+                            {/* <button id="delete" onClick={() => deleteToDo(todo.id)}><img src="check-mark.png" width='24'></img></button> */}
                         </div>
                     </div>
                 ))}
+            </div>
             </div>
         </>
     );
