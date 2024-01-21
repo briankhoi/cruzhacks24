@@ -1,0 +1,54 @@
+.portal {
+    border-radius: 32px;
+    background-color: #eadbb9;
+    height: 525px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    margin-left: 25px;
+    .title {
+        font-size: 24px;
+        align-self: flex-start;
+        margin-left: 7.5px;
+        // margin-top: -5px;
+    }
+    .card {
+        border-radius: 16px;
+        cursor: pointer;
+        // margin-top: -5px;
+        .header {
+            border-top-right-radius: 16px;
+            border-top-left-radius: 16px;
+            height: 125px;
+            width: 300px;
+            overflow: hidden;
+            img {
+                border-top-right-radius: 16px;
+                border-top-left-radius: 16px;
+                // object-fit: cover;
+                height: 200px;
+                margin: -25px 0 0 0;
+            }
+        }
+        .footer {
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            height: 50px;
+            font-size: 20px;
+            margin-left: 10px;
+            margin-bottom: -10px;
+            margin-top: 10px;
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
+        }
+        .footer-description {
+            margin-left: 10px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+    }
+}
