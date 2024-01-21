@@ -119,7 +119,8 @@ const Flashcards = () => {
                 style={{
                   width: 'calc(33.333% - 20px)',
                   height: '100px',
-                  backgroundColor: '#4285f4',
+                  backgroundColor: '#71906e',
+                  paddingLeft: '10px',
                   borderRadius: '10px',
                   margin: '10px',
                   cursor: 'pointer',

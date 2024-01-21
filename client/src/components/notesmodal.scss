@@ -1,13 +1,69 @@
 .modal1 {
     background-color: #eadbb9 !important;
-    border-radius: 32px !important;
+    border-radius: 16px !important;
     display: flex;
     flex-direction: column;
     padding: 25px;
     width: 800px;
     height: 500px;
-    // align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items: flex-start;
+  
     .title {
-        font-size: 32px;
+      font-size: 32px;
+      text-align: left;
+      margin-bottom: 10px;
     }
-}
+  
+    .close-button {
+      background-color: #ff6347; /* Choose your desired color */
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 16px;
+      cursor: pointer;
+      align-self: flex-end;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+  
+    .flashcards-container,
+    .quiz-container {
+      width: 100%;
+      text-align: left;
+      margin-top: 10px;
+    }
+  
+    .flashcards-title,
+    .quizzes-title {
+      text-align: left;
+      margin-bottom: 5px;
+      font-size: 1.2em; /* Match the font size with flashcard icons */
+    }
+  
+    .flashcards-icons,
+    .quizzes-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+  
+    .flashcards-icons div,
+    .quizzes-icons div {
+      width: calc(33.333% - 20px);
+      height: 100px;
+      background-color: #71906e !important;
+      border-radius: 10px;
+      margin: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 1.2em;
+    }
+  }
+  
