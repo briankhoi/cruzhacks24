@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import config from '../config';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import * as pdfjs from 'pdfjs-dist';
+import AskBardChatBox from './askbard';
+import Flashcards from './flashcards.js';
+import Quiz from './quiz';
 
 const apiKey = config.API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
@@ -265,7 +268,12 @@ export default function StudyGenerator() {
                     Quiz
                 </button>
             </div>
+            {/* Include the AskBardChatBox component */}
+            <Flashcards />
+            <AskBardChatBox />
             {/* Omitted the display of studyMaterials */}
         </div>
     );         
 };
+
+
