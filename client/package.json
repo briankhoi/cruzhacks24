@@ -1,7 +1,6 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
@@ -11,6 +10,7 @@
     "autoprefixer": "^10.4.17",
     "bootstrap": "^5.3.2",
     "flowbite-react": "^0.7.2",
+    "pdfjs-dist": "^4.0.379",
     "postcss": "^8.4.33",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.0",
