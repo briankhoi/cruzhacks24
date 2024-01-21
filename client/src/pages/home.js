@@ -6,6 +6,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import StudyPortal from "../components/studyportal";
 import Timer from "../components/timer";
 import GenerateModal from "../components/generateModal";
+import NotesModal from "../components/notesmodal";
+import AskBardChatBox from "../components/askbard";
 
 export default function HomePage() {
     const [user, setUser] = useState(null);
@@ -27,6 +29,7 @@ export default function HomePage() {
         .then(data => {
             if (data.isAuthenticated) {
                 setUser(data.user);
+                // console.log(user);
             }
         })
         .catch(error => {
@@ -55,6 +58,8 @@ export default function HomePage() {
             <StudyPortal setOpenGenerateModal={setOpenGenerateModal} setOpenNoteModal={setOpenNoteModal} />
             <Timer />
             <GenerateModal openGenerateModal={openGenerateModal} setOpenGenerateModal={setOpenGenerateModal} />
+            <NotesModal openNoteModal={openNoteModal} setOpenNoteModal={setOpenNoteModal} />
+            <AskBardChatBox />        
         </div>
 
     );

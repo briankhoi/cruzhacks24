@@ -12,7 +12,7 @@ export default function StudyPortal({ setOpenGenerateModal, setOpenNoteModal }) 
 
     return (
         <div className="portal bg-gray-100 p-4">
-          <h1 className="title text-gray-800 text-2xl mb-4">Study</h1>
+          <h1 className="title font-bold text-gray-800 text-2xl mb-4">Study</h1>
           <div onClick={handleNoteClick} class="card">
             <div class="header">
                 <img alt="#" src="https://cdn.discordapp.com/attachments/974855529962819664/1198561652057067630/pexels-karolina-grabowska-4195327.jpg?ex=65bf5a86&is=65ace586&hm=65232c9bded8aee290b210e72b39a8b1ac873b6b967f412fe39d6e9cf04d8854&"/>

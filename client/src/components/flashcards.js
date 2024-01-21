@@ -1,7 +1,30 @@
 // flashcards.js
 import React, { useState, useRef, useEffect } from 'react';
+import "./flashcards.scss";
 
 const Flashcards = () => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+      fetch("http://localhost:5000/api/user", {
+          credentials: "include", // include cookies
+      })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error("Network response was not ok");
+              }
+              return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+              if (data.isAuthenticated) {
+                  setUser(data.user);
+                  console.log(data.user.flashcards); // Access the flashcards field
+              }
+          })
+          .catch((error) => {
+              console.error("fetch operation error:", error);
+          });
+  }, []);
   // Hardcoded flashcard data
   const flashcardsData = [
     {
@@ -31,21 +54,14 @@ const Flashcards = () => {
     }
   ];
 
-  const [isMainPopupOpen, setIsMainPopupOpen] = useState(false);
+  // const [isMainPopupOpen, setIsMainPopupOpen] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [isGroupPopupOpen, setIsGroupPopupOpen] = useState(false);
   const [isSlideshowOpen, setIsSlideshowOpen] = useState(false);
   const [selectedFlashcardIndex, setSelectedFlashcardIndex] = useState(0);
   const [showFront, setShowFront] = useState(true);
 
-  const mainPopupRef = useRef(null);
   const slideshowRef = useRef(null);
-
-  const handleMainPopupOpen = () => {
-    setIsMainPopupOpen(true);
-    setIsGroupPopupOpen(false);
-    setIsSlideshowOpen(false);
-  };
 
   const handleGroupSelect = (index) => {
     setSelectedGroup(index);
@@ -53,23 +69,10 @@ const Flashcards = () => {
     setIsSlideshowOpen(true);
   };
 
-  const handleCloseMainPopup = () => {
-    setIsMainPopupOpen(false);
-    setIsGroupPopupOpen(false);
-    setIsSlideshowOpen(false);
-  };
-
   const handleCloseGroupPopup = () => {
     setSelectedGroup(null);
     setIsGroupPopupOpen(false);
     setIsSlideshowOpen(false);
-  };
-
-  const handleClickOutside = (event) => {
-    if (!isSlideshowOpen && mainPopupRef.current && !mainPopupRef.current.contains(event.target)) {
-      setIsMainPopupOpen(false);
-      setIsGroupPopupOpen(false);
-    }
   };
 
   const handleSlideshowClick = (event) => {
@@ -80,13 +83,6 @@ const Flashcards = () => {
     setIsGroupPopupOpen(false);
     setIsSlideshowOpen(false);
   };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isSlideshowOpen]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleSlideshowClick);
@@ -113,33 +109,8 @@ const Flashcards = () => {
   };
 
   return (
-    <div>
-      {/* Button to open main flashcards popup */}
-      <div
-        style={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '150px',
-          height: '50px',
-          backgroundColor: 'white',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          cursor: 'pointer',
-          color: 'black',
-          fontSize: '1.2em',
-          border: '2px solid black',
-        }}
-        onClick={handleMainPopupOpen}
-      >
-        Flashcards
-      </div>
-
-      {/* Main popup with icons of flashcard groups */}
-      {isMainPopupOpen && (
-        <div ref={mainPopupRef} style={{ position: 'fixed', bottom: '0', left: '0', width: '100%', height: '66.666%', backgroundColor: 'rgba(255, 255, 255, 0.95)', zIndex: '1000', overflow: 'auto' }}>
+    <div class="flashcards">
+        <div>
           {/* Icons of flashcard groups */}
           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
             {flashcardsData.map((group, index) => (
@@ -165,7 +136,6 @@ const Flashcards = () => {
             ))}
           </div>
         </div>
-      )}
 
       {/* Popup with slideshow of flashcards for selected group */}
       {isGroupPopupOpen && selectedGroup !== null && (

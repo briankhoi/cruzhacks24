@@ -1,0 +1,13 @@
+.modal1 {
+    background-color: #eadbb9 !important;
+    border-radius: 32px !important;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    width: 800px;
+    height: 500px;
+    // align-items: center;
+    .title {
+        font-size: 32px;
+    }
+}
