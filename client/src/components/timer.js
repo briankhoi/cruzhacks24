@@ -83,7 +83,7 @@ export default function Timer() {
                 </div>
                 {/* <div className = 'count'>{count} cycle/s (4 cycles)</div> */}
                 <div class="timer2">
-                    <div className ="resetTimerButton" onClick={toggleTimer}>
+                    <div className="font-bold resetTimerButton" onClick={toggleTimer}>
                         {isActive ? 'Pause' : 'Start'}
                     </div>
                     {/* <div className = "resetTimerButton" onClick={resetTimer}>Reset</div> */}
