@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import React, { useState, useRef, useEffect } from 'react';
 
 const Quiz = () => {
@@ -129,4 +127,4 @@ const Quiz = () => {
 };
 
 export default Quiz;
->>>>>>> Stashed changes
+
