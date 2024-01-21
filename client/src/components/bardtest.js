@@ -270,6 +270,7 @@ export default function StudyGenerator() {
             </div>
             {/* Include the AskBardChatBox component */}
             <Flashcards />
+            <Quiz />
             <AskBardChatBox />
             {/* Omitted the display of studyMaterials */}
         </div>
