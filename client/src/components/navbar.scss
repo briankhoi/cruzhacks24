@@ -1,0 +1,20 @@
+.navbar {
+    display: flex;
+    // padding-left: %;
+    // padding-right: 10%;
+    .logo {
+        width: 25%;
+        margin-left: 5%;
+    }
+    .avatar {
+        border: 1px solid red;
+        margin-right: 3%;
+        width: 50px;
+        height: 50px;
+        background-position: center; // this will center the image
+        background-size: cover; // this will cover the entire div and crop the rest
+        background-repeat: no-repeat; // this will prevent the image from repeating
+        border-radius: 50%; // this will make the div circular
+        cursor: pointer;
+    }
+}

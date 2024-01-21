@@ -3,9 +3,14 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5000;
-app.use(cors());
+
+// enable cors to allow requests from the client
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+}));
 app.use(express.json());
-app.use(require("./routes/record"));
+
 // get driver connection
 const dbo = require("./db/conn");
 app.listen(port, () => {
@@ -40,9 +45,22 @@ app.use(auth(config));
 // req.isAuthenticated is provided from the auth router
 app.get("/", (req, res) => {
     res.redirect("http://localhost:3000/home");
-    res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
 });
 
-// app.get("/home", (req, res) => {
-
-// });
+// send info back to client regarding auth state of user
+app.get("/api/user", (req, res) => {
+  console.log("bruh1");
+  console.log(req.oidc);
+  if (req.oidc.isAuthenticated()) {
+    console.log("bruh");
+    console.log(req.oidc);
+      res.json({
+          isAuthenticated: true,
+          user: req.oidc.user,
+      });
+  } else {
+      res.json({
+          isAuthenticated: false,
+      });
+  }
+});
