@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import config from "../config";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import * as pdfjs from "pdfjs-dist";
+import "./generatemodal.scss";
 
 const apiKey = config.API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
@@ -260,30 +261,36 @@ export default function GenerateModal({
     };
 
     return (
-        <div>
             <Modal
+                // class="bg123"
                 show={openGenerateModal}
+                size="md"
                 onClose={() => setOpenGenerateModal(false)}
             >
                 <div
+                    class="bg123"
                     style={{
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
                         marginTop: "50px",
+                        backgroundColor: "#ecd9ba",
                     }}
                 >
-                    <div style={{ fontSize: "1.5em", marginBottom: "20px" }}>
-                        Generate study materials.
+                    <div class="title font-bold text-gray-800 text-2xl mb-4" style={{ fontSize: "1.5em", marginBottom: "20px" }}>
+                        Generate Study Materials
                     </div>
                     <div style={{ display: "flex", marginBottom: "20px" }}>
                         <button
                             onClick={() => handleToggleTab("text")}
                             style={{
                                 backgroundColor:
-                                    activeTab === "text" ? "blue" : "gray",
+                                    activeTab === "text" ? "#71906e" : "gray",
                                 color: "white",
                                 marginRight: "10px",
+                                borderRadius: "32px",
+                                height: "40px",
+                                width: "80px",
                             }}
                         >
                             Enter Text
@@ -294,9 +301,12 @@ export default function GenerateModal({
                                 backgroundColor:
                                     activeTab === "files" ? "blue" : "gray",
                                 color: "white",
+                                borderRadius: "32px",
+                                height: "40px",
+                                width: "80px",
                             }}
                         >
-                            Upload Files
+                            Upload
                         </button>
                     </div>
                     {activeTab === "text" && (
@@ -411,11 +421,14 @@ export default function GenerateModal({
                                 )
                             }
                             style={{
-                                backgroundColor: "green",
+                                backgroundColor: "71906e",
                                 color: "white",
                                 width: "48%",
                                 height: "40px",
                                 marginRight: "10px",
+                                borderRadius: "32px",
+                                height: "40px",
+                                width: "80px",
                             }}
                         >
                             Flashcards
@@ -438,10 +451,13 @@ export default function GenerateModal({
                                 )
                             }
                             style={{
-                                backgroundColor: "green",
+                                backgroundColor: "#7db6a3",
                                 color: "white",
                                 width: "48%",
                                 height: "40px",
+                                borderRadius: "32px",
+                                height: "40px",
+                                width: "80px",
                             }}
                         >
                             Quiz
@@ -453,6 +469,5 @@ export default function GenerateModal({
                     click to close
                 </div>
             </Modal>
-        </div>
     );
 }
