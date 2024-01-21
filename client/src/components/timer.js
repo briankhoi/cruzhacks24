@@ -78,15 +78,16 @@ export default function Timer() {
     return (
         <div class="timer-container">
             <div className="timer">
-                <div>
+                <div class="timer1">
                     {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
                 </div>
                 {/* <div className = 'count'>{count} cycle/s (4 cycles)</div> */}
-                <button className ="toggleButton" onClick={toggleTimer}>
-                    {isActive ? 'Pause' : 'Start'}
-                    
-                </button>
-                <button className = "resetTimerButton" onClick={resetTimer}>Reset</button>
+                <div class="timer2">
+                    <div className ="resetTimerButton" onClick={toggleTimer}>
+                        {isActive ? 'Pause' : 'Start'}
+                    </div>
+                    {/* <div className = "resetTimerButton" onClick={resetTimer}>Reset</div> */}
+                </div>
             </div>
         </div>
     );

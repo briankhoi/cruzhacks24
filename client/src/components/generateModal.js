@@ -261,7 +261,6 @@ export default function GenerateModal({
 
     return (
         <div>
-            <h1>GenerateModal</h1>
             <Modal
                 show={openGenerateModal}
                 onClose={() => setOpenGenerateModal(false)}
