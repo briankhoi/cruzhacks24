@@ -4,20 +4,21 @@
   display: grid;
   position: relative;
   margin-left: 70px !important;
-  width: 550px !important;
+  width: 650px !important;
   height: flex;
-  background-color: #bdd0c4;
+  background-color: #ecd9ba;
   border-radius: 16px;
   padding-top: 50px;
   padding-bottom: 50px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 50px !important;
+  padding-right: 50px !important;
 }
 
 .button2 {
   position: absolute;
-  right: 20px;
+  right: 50px;
 }
+
 
 img {
   width: 24px;

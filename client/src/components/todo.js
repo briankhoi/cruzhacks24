@@ -32,7 +32,7 @@ export default function ToDo() {
     /*Discards edits*/
     const discardEdits = id => {
         setToDoList(toDoList.map(todo => 
-            todo.id === id ? {...todo, isEditing: false} : todo));
+            todo.id === id ? {...todo, isEditing: false, task: todo.originalTask } : todo));
     };
 
     /* To edit */
@@ -76,8 +76,6 @@ export default function ToDo() {
                             </span>
                         )}
                         <div className="button2">
-                            {/* <button id="edit" onClick={() => toggleEditing(todo.id)}> */}
-                                {/* {todo.isEditing ? 'Save' : 'Edit'} */}
                                 {todo.isEditing ? (
                                     <div>
                                     <img
@@ -99,8 +97,6 @@ export default function ToDo() {
                                     <img src="trash.png" alt="Delete"  width="24" onClick={() => deleteToDo(todo.id)}/>
                                     </div>
                                 )}
-                            {/* </button> */}
-                            {/* <button id="delete" onClick={() => deleteToDo(todo.id)}><img src="check-mark.png" width='24'></img></button> */}
                         </div>
                     </div>
                 ))}
