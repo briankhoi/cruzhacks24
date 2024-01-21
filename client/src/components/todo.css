@@ -20,6 +20,33 @@
   right: 50px;
 }
 
+.rowabc {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  /* border: 1px solid red; */
+  justify-content: space-between;
+  margin-top: -100px;
+}
+
+#form12 {
+  border-radius: 16px;
+  height: 32px;
+}
+
+.wow1 {
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid red; */
+  /* margin-left: -50px; */
+  width: 70px;
+  margin-bottom: 10px;
+}
+
+#textabc {
+  height: 32px;
+  border-radius: 16px;
+}
 
 img {
   width: 24px;
@@ -32,10 +59,22 @@ input {
   height: 15px;
 }
 
+#save {
+  margin-right: 10px;
+}
+
+#sad {
+  margin-top: -125px;
+}
+
 #submit {
   margin: 10px; 
   border-radius: 18px;
-  background-color: red;
+  background-color: #ecd9ba;
+  height: 32px;
+  border: 1px solid black;
+  width: 80px;
+
 }
 
 .button {
@@ -47,6 +86,10 @@ input {
 
 #edit {
   border-radius: 18px;
+}
+
+#edit2 {
+  margin-right: 10px;
 }
 
 #delete {

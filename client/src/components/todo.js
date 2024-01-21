@@ -49,22 +49,26 @@ export default function ToDo() {
         <><div class='container'>
             <h2>To-do List</h2>
             <form onSubmit={handleSubmit}>
+                <div class="rowabc">
                 <input 
                     type='text' 
                     value={value} 
+                    id="form12"
                     onChange={(e) => setValue(e.target.value)}
                     placeholder='What&#39;s on your to-do list today?'
                 />
                 <div className="button">
                     <button type="submit" id="submit">Add Task</button>
                 </div>
+                </div>
             </form>
-            <div>
+            <div id="sad">
                 {toDoList.map(todo => (
-                    <div key={todo.id} style={{ display: 'flex'}}>
+                    <div key={todo.id} style={{ display: 'flex', marginBottom: "10px"}}>
                         {todo.isEditing ? (
                             <input 
                                 type="text" 
+                                id="textabc"
                                 value={todo.task} 
                                 onChange={(e) => handleEditChange(todo.id, e.target.value)}
                             />
@@ -77,7 +81,7 @@ export default function ToDo() {
                         )}
                         <div className="button2">
                                 {todo.isEditing ? (
-                                    <div>
+                                    <div class="wow1">
                                     <img
                                         src="save-icon.png"
                                         alt="Save"
@@ -92,8 +96,8 @@ export default function ToDo() {
                                     />
                                     </div>
                                 ) : (
-                                    <div>
-                                    <img src="edit2.png" alt="Edit" width="24" onClick={() => toggleEditing(todo.id)}/>
+                                    <div class="wow1">
+                                    <img src="edit2.png" id="edit2" alt="Edit" width="24" onClick={() => toggleEditing(todo.id)}/>
                                     <img src="trash.png" alt="Delete" width="24" onClick={() => deleteToDo(todo.id)}/>
                                     </div>
                                 )}
