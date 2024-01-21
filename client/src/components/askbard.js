@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import config from '../config';
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import './askbard.css';
 
 const apiKey = config.API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
@@ -50,38 +51,14 @@ const AskBardChatBox = () => {
 
   return (
     <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 999 }}>
-      <div
-        style={{
-          width: '50px',
-          height: '50px',
-          backgroundColor: hover ? '#4285f4' : '#4285f4',
-          borderRadius: '50%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          cursor: 'pointer',
-          position: 'relative',
-        }}
+      <div className="bard-icon"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         onClick={toggleChat}
       >
-        <span style={{ color: 'white', fontSize: '1.5em' }}>★</span>
+        <span style={{ color: 'white'}}><img src="bard.png" width="60"></img></span>
         {hover && (
-          <div
-            style={{
-              position: 'absolute',
-              top: '-30px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              backgroundColor: '#4285f4',
-              color: 'white',
-              padding: '5px',
-              borderRadius: '5px',
-              fontSize: '12px',
-              whiteSpace: 'nowrap',
-            }}
-          >
+          <div className='bard-banner'>
             Ask Bard
           </div>
         )}
@@ -111,7 +88,7 @@ const AskBardChatBox = () => {
               textAlign: 'center',
               fontSize: '18px',
               fontWeight: 'bold',
-              backgroundColor: '#4285f4',
+              backgroundColor: '#71906e',
               color: 'white',
               borderTopLeftRadius: '10px',
               borderTopRightRadius: '10px',
@@ -163,21 +140,11 @@ const AskBardChatBox = () => {
               type="text"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Type your message..."
-              style={{ flex: 1, marginRight: '10px', padding: '8px', borderRadius: '5px' }}
-            />
-            <button
-              onClick={sendMessage}
-              style={{
-                backgroundColor: '#4285f4',
-                color: 'white',
-                padding: '8px 15px',
-                borderRadius: '5px',
-                cursor: 'pointer',
-              }}
-            >
+              placeholder="Type your message...">
+            </input>
+            <div className="bard-button" onClick={sendMessage}>
               Send
-            </button>
+            </div>
           </div>
         </div>
       )}

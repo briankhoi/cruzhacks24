@@ -1,0 +1,42 @@
+.bard-icon {
+    width: 50px !important;
+    height: 50px !important;
+    background-color: #71906e;
+    border-radius: 50% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative
+}
+
+.bard-banner {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #71906e;
+    color: white;
+    padding: 5px;
+    white-space: nowrap
+}
+
+.bard-icon:hover {
+    background-color: #71906e;
+}
+
+input {
+    height: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.bard-button {
+    position: absolute;
+    right: 20px;
+    background-color: #71906e;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer
+}

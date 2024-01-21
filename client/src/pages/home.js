@@ -6,7 +6,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 import StudyPortal from "../components/studyportal";
 import Timer from "../components/timer";
 import GenerateModal from "../components/generateModal";
+<<<<<<< Updated upstream
 import NotesModal from "../components/notesmodal";
+=======
+>>>>>>> Stashed changes
 import AskBardChatBox from "../components/askbard";
 
 export default function HomePage() {
@@ -53,13 +56,17 @@ export default function HomePage() {
         <div class="home">
             <Navbar user={user} onLogout={handleLogout}/>
 
-            <h1>Home Page</h1>
+            <h1>Welcome, Sammy!</h1>
             <ToDo />
             <StudyPortal setOpenGenerateModal={setOpenGenerateModal} setOpenNoteModal={setOpenNoteModal} />
             <Timer />
             <GenerateModal openGenerateModal={openGenerateModal} setOpenGenerateModal={setOpenGenerateModal} />
+<<<<<<< Updated upstream
             <NotesModal openNoteModal={openNoteModal} setOpenNoteModal={setOpenNoteModal} />
             <AskBardChatBox />        
+=======
+            <AskBardChatBox />  
+>>>>>>> Stashed changes
         </div>
 
     );

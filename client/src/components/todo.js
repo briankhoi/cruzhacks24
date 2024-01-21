@@ -94,7 +94,7 @@ export default function ToDo() {
                                 ) : (
                                     <div>
                                     <img src="edit2.png" alt="Edit" width="24" onClick={() => toggleEditing(todo.id)}/>
-                                    <img src="trash.png" alt="Delete"  width="24" onClick={() => deleteToDo(todo.id)}/>
+                                    <img src="trash.png" alt="Delete" width="24" onClick={() => deleteToDo(todo.id)}/>
                                     </div>
                                 )}
                         </div>
