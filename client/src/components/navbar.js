@@ -10,11 +10,11 @@ export default function Navbar({user, onLogout}) {
    <div class="navbar">
      <nav className="navbar navbar-light">
        <NavLink className="navbar-brand" to="/">
-       <img alt="logo" class="logo" src="/icon_transparent.png"></img>
+       <img alt="logo" className="logo" src="/icon_transparent.png"></img>
        </NavLink>
      </nav>
       <Dropdown
-        label={<div rounded className="avatar" style={{backgroundImage: `url('${user ? user.picture : "https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"}')`}}/>}
+        label={<div className="avatar" style={{backgroundImage: `url('${user ? user.picture : "https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"}')`}}/>}
         arrowIcon={false}
         // inline
         class="test"
