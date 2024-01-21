@@ -73,6 +73,28 @@ app.get("/api/user", async (req, res) => {
   }
 });
 
+// add new flashcard to user document in mongodb
+app.post("/api/user/update/flashcard", async (req, res) => {
+    const { sub, flashcard } = req.body;
+    const user = await usersCollection.findOneAndUpdate(
+      { sub: sub },
+      { $push: { flashcard: flashcard } },
+      { new: true, useFindAndModify: false }
+    );
+    res.json(user);
+});
+
+// add new quiz to user document in mongodb
+app.post("/api/user/update/quiz", async (req, res) => {
+    const { sub, quiz } = req.body;
+    const user = await usersCollection.findOneAndUpdate(
+      { sub: sub },
+      { $push: { quizzes: quiz } },
+      { new: true, useFindAndModify: false }
+    );
+    res.json(user);
+});
+
 app.get('/logout', (req, res) => {
   req.session.destroy();
   res.clearCookie('connect.sid');
