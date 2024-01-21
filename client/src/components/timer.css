@@ -1,0 +1,42 @@
+.timer{
+    
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    font-size: 200px;
+    text-align: center;
+    /* border: 10px solid blue; */
+    font-family: 'Arial';
+    /* margin: 0 auto; */
+    /* width: 25%; */
+
+}
+
+.timer-container {
+    text-align: center;
+    border: 1px solid red;
+    width: 50%;
+    height: 40%;
+    margin: 0 auto; /* Center the timer box horizontally */
+    /* height: 400px; */
+}
+
+.timerButtonBox{
+    text-align: center;
+}
+
+
+.studyTimerHeading{
+    text-align: center;
+    font-family: 'Arial';
+    font-size: 100px
+}
+
+.toggleButton{
+    height: 5 px;
+    margin-right: 50px;
+    font-size: 50px;
+}
+
+.resetTimerButton{
+    font-size: 50px;
+}
+

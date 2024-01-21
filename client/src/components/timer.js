@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './timer.css';
 
 export default function Timer() {
     const [minutes, setMinutes] = useState(25);
@@ -75,18 +76,17 @@ export default function Timer() {
     };
 
     return (
-        <div>
-            <h1>Study timer!</h1>
+        <div class="timer-container">
             <div className="timer">
                 <div>
                     {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
                 </div>
                 {/* <div className = 'count'>{count} cycle/s (4 cycles)</div> */}
-                <button onClick={toggleTimer}>
+                <button className ="toggleButton" onClick={toggleTimer}>
                     {isActive ? 'Pause' : 'Start'}
                     
                 </button>
-                <button onClick={resetTimer}>Reset</button>
+                <button className = "resetTimerButton" onClick={resetTimer}>Reset</button>
             </div>
         </div>
     );
