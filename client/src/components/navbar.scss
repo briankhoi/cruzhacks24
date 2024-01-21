@@ -8,7 +8,6 @@
     }
     .avatar {
         border: 1px solid red;
-        margin-right: 3%;
         width: 50px;
         height: 50px;
         background-position: center; // this will center the image
@@ -16,5 +15,16 @@
         background-repeat: no-repeat; // this will prevent the image from repeating
         border-radius: 50%; // this will make the div circular
         cursor: pointer;
+        .dropdown-menu {
+            // position: absolute;
+            // background-color: white;
+            border: 1px solid red;
+            padding: 10px;
+            width: 200px;
+            right: 0;
+          }
+    }
+    .test {
+        margin-right: 3%;
     }
 }

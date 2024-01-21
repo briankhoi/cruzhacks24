@@ -64,3 +64,10 @@ app.get("/api/user", (req, res) => {
       });
   }
 });
+
+app.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.clearCookie('connect.sid');
+  // redirect to homepage after logout
+  res.redirect("http://localhost:3000/home");
+});

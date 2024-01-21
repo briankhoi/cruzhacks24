@@ -18,6 +18,7 @@ import HomePage from "./pages/home";
      {/* <Navbar /> */}
      <Routes>
        <Route exact path="/" element={<HomePage />} />
+       <Route exact path="/callback" element={<HomePage />} />
        <Route exact path="/home" element={<HomePage />} />
        <Route exact path="/bard" element={<Bardtest />} />
      </Routes>
