@@ -47,7 +47,7 @@ export default function ToDo() {
 
     return (
         <><div class='container'>
-            <h2>To-do List</h2>
+            <div class="title font-bold text-gray-800 text-2xl mb-4">To-do List</div>
             <form onSubmit={handleSubmit}>
                 <div class="rowabc">
                 <input 
@@ -58,7 +58,7 @@ export default function ToDo() {
                     placeholder='What&#39;s on your to-do list today?'
                 />
                 <div className="button">
-                    <button type="submit" id="submit">Add Task</button>
+                    <button type="submit" id="submit">+</button>
                 </div>
                 </div>
             </form>

@@ -54,8 +54,8 @@ export default function HomePage() {
             <Navbar user={user} onLogout={handleLogout}/>
             <Timer />
             <div class="row1">
-                <ToDo />
-                <StudyPortal setOpenGenerateModal={setOpenGenerateModal} setOpenNoteModal={setOpenNoteModal} />
+                <ToDo class="bruh23" />
+                <StudyPortal class="bruh23" setOpenGenerateModal={setOpenGenerateModal} setOpenNoteModal={setOpenNoteModal} />
                 <GenerateModal openGenerateModal={openGenerateModal} setOpenGenerateModal={setOpenGenerateModal} />
                 <NotesModal openNoteModal={openNoteModal} setOpenNoteModal={setOpenNoteModal} />
             </div>
