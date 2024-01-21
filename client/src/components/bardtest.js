@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import config from '../config';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Document, Page } from 'react-pdf';
 import * as pdfjs from 'pdfjs-dist';
 
 const apiKey = config.API_KEY;
